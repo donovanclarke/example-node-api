@@ -27,4 +27,29 @@ module.exports = function(app, db) {
       }
     })
   });
+
+  app.delete('/notes/:id', (req, res) => {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    data.collection('notes').remove(details, (err, item) => {
+      if (err) {
+        res.send( {'error': err });
+      } else {
+        res.send('Note ' + id + ' deleted!');
+      }
+    })
+  })
+
+  app.put('/notes/:id', (req, res) => {
+    const id = req.params.id;
+    const details = { '_id': new ObjectID(id) };
+    const note = { text: req.body.body, title: req.body.title };
+    data.collection('notes').update(details, note, (err, result) => {
+      if (err) {
+        res.send({ 'error': err });
+      } else {
+        res.send(note);
+      }
+    })
+  })
 };
