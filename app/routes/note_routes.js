@@ -9,7 +9,7 @@ module.exports = function(app, db) {
       if (err) {
         res.send({'error': err});
       } else {
-        res.send(items[0]);
+        res.send(items);
       }
     })
   })
