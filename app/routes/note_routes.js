@@ -4,7 +4,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports = function(app, db) {
   const data = db.db('noteapi');
 
-  app.get('/notes/all', (req, res) => {
+  app.get('/notes', (req, res) => {
     data.collection('notes').find({}).toArray(function(err, items) {
       if (err) {
         res.send({'error': err});
